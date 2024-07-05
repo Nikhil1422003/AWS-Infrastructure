@@ -38,6 +38,13 @@ This project involves deploying a high-availability Pyhton application on AWS us
 # Prerequistes
 1.Knowledge about AWS services like EC2,LAMBDA,RDS,S3 ETC.....
 
+# Project Architecture
+
+![project architecture](https://github.com/Nikhil1422003/AWS-Infrastructure/assets/155822950/e93c8f61-608e-4362-90d9-84989315bb7a)
+
+![ptoj tech](https://github.com/Nikhil1422003/AWS-Infrastructure/assets/155822950/184d4164-9ef1-436c-b8d0-f2946959a75b)
+
+
 # Steps to create this infrastructure
  go to the aws management console.
 
@@ -141,7 +148,7 @@ This project involves deploying a high-availability Pyhton application on AWS us
 - Target Group: MyTargetGroup
 - Configure scaling policies.
 
-**3. Create RDS DB Instance and DynamoDB Table**
+**4. Create RDS DB Instance and DynamoDB Table**
 #### Create an RDS Security Group:
 
 - Repeat the security group creation steps, name it RDS-SG.
@@ -172,3 +179,86 @@ https://github.com/Nikhil1422003/aws-code-main.git
 - Table name: MyDynamoTable.
 - Partition key: ID (String).
 
+#### Connect RDS database in ec2
+
+Once the above-mentioned steps are completed, connect RDS database in ec2:
+```
+mysql -h endpoint of RDS -u (username) -p (password)
+``` 
+#### create database in ec2 terminal with below commands
+
+Once the above-mentioned steps are completed, apply the following commands to create the database:
+```
+create database project;
+show databases;
+use project;
+show tables;
+
+```
+
+once the steps completed go to repo that cloned previously and move to **aws-code-main**
+and configure the file i.e **config.py** as per our requirements like database name etc.....
+
+#### 5. Create S3 Bucket
+- Create an S3 Bucket:
+- Open the S3 Dashboard.
+- Click on "Create bucket".
+- Name: mybucket.
+- Region: us-east-1.
+- Leave default settings.
+
+
+#### 6. Create Instance Profile
+
+#### Create an IAM Role:
+
+- Open the IAM Dashboard.
+- Click on "Roles".
+- Click on "Create role".
+- Select "AWS service" and EC2.
+- Attach policies: AmazonRDSFullAccess, AmazonDynamoDBFullAccess, AmazonS3FullAccess.
+- Name: EC2InstanceProfileRole.
+#### Create an Instance Profile:
+  
+- Click on "Instance profiles".
+- Click on "Create instance profile".
+- Name: EC2InstanceProfile.
+- Attach the role EC2InstanceProfileRole.
+
+#### 7. Create Lambda Function and SNS Topic
+
+#### Create an S3 Event Notification:
+
+- Open the S3 Dashboard, select your bucket (mybucket).
+- Click on "Properties".
+- Scroll to "Event notifications".
+- Click on "Create event notification".
+- Configure to trigger on "All object create events".
+- Send to Lambda function (create new).
+#### Create a Lambda Function:
+
+- Open the Lambda Dashboard.
+- click on "Create function".
+- Name: S3EventLambda.
+- Runtime: Python 3.x.
+- Role: Create a new role with basic Lambda permissions.
+- Write the function code to handle the S3 event.
+#### Create an SNS Topic:
+
+- Open the SNS Dashboard.
+- Click on "Create topic".
+- Name: MySNSTopic.
+#### Create a subscription to your email address.
+- Configure Lambda to Publish to SNS:
+
+- Update the Lambda function to publish messages to MySNSTopic.
+
+Once the above-mentioned steps are completed, apply the following command to get the output:
+```
+sudo python3 EmpApp.py
+```
+
+
+- once  all the progress completed copy the loadbalancer DNS and paste in the browser we will get output of the image given below
+
+![WhatsApp Image 2024-07-05 at 12 46 21 PM](https://github.com/Nikhil1422003/AWS-Infrastructure/assets/155822950/25ddc4f5-d122-442e-9810-d4aa364d76f5)
