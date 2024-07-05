@@ -1,4 +1,4 @@
-# AWS-Infrastructure
+# AWS-Infrastructure-Pyhton application deployment in AWS
 
 **Deploying web Application using PYTHON**
 
