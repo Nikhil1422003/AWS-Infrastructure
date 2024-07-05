@@ -253,7 +253,7 @@ and configure the file i.e **config.py** as per our requirements like database n
 
 - Update the Lambda function to publish messages to MySNSTopic.
 
-Once the above-mentioned steps are completed, apply the following command to get the output:
+Once the above-mentioned steps are completed, apply the following command to run the application:
 ```
 sudo python3 EmpApp.py
 ```
