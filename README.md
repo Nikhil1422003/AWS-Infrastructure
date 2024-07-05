@@ -196,7 +196,7 @@ show tables;
 
 ```
 
-once the steps completed go to repo that cloned previously and move to **aws-code-main**
+once the steps completed go to repo that cloned previously and move to the directory named as **aws-code-main**
 and configure the file i.e **config.py** as per our requirements like database name etc.....
 
 #### 5. Create S3 Bucket
